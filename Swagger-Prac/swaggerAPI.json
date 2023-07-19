@@ -1,0 +1,228 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Game API",
+      "description": "API for managing games",
+      "license": {
+        "name": "MIT"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/games": {
+        "get": {
+          "summary": "Get all games",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                        "id": 540,
+                        "title": "Overwatch 2",
+                        "thumbnail": "https://www.freetogame.com/g/540/thumbnail.jpg",
+                        "short_description": "A hero-focused first-person team shooter from Blizzard Entertainment.",
+                        "game_url": "https://www.freetogame.com/open/overwatch-2",
+                        "genre": "Shooter",
+                        "platform": "PC (Windows)",
+                        "publisher": "Activision Blizzard",
+                        "developer": "Blizzard Entertainment",
+                        "release_date": "2022-10-04",
+                        "freetogame_profile_url": "https://www.freetogame.com/overwatch-2" 
+                    },
+                    {
+                        "id": 521,
+                        "title": "Diablo Immortal",
+                        "thumbnail": "https://www.freetogame.com/g/521/thumbnail.jpg",
+                        "short_description": "Built for mobile and also released on PC, Diablo Immortal fills in the gaps between Diablo II and III in an MMOARPG environment.",
+                        "game_url": "https://www.freetogame.com/open/diablo-immortal",
+                        "genre": "MMOARPG",
+                        "platform": "PC (Windows)",
+                        "publisher": "Blizzard Entertainment",
+                        "developer": "Blizzard Entertainment",
+                        "release_date": "2022-06-02",
+                        "freetogame_profile_url": "https://www.freetogame.com/diablo-immortal"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new game",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Game"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/{id}": {
+        "get": {
+          "summary": "Get a game by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a game",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Game"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a game",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+        "schemas": {
+          "Game": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "title": {
+                "type": "string"
+              },
+              "thumbnail": {
+                "type": "string",
+                "format": "uri"
+              },
+              "short_description": {
+                "type": "string"
+              },
+              "game_url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "genre": {
+                "type": "string"
+              },
+              "platform": {
+                "type": "string"
+              },
+              "publisher": {
+                "type": "string"
+              },
+              "developer": {
+                "type": "string"
+              },
+              "release_date": {
+                "type": "string",
+                "format": "date"
+              },
+              "freetogame_profile_url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        }
+      }
+  }
+  
